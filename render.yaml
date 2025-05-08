@@ -1,0 +1,48 @@
+# render.yaml
+# This file defines the services for your Django application on Render.
+
+services:
+  - type: web # Specifies a web service
+    name: django-portfolio # Name of your service on Render
+    env: python # Environment (Python, Node, etc.)
+    region: oregon # Optional: choose a region closer to you/your users (e.g., frankfurt, singapore)
+    plan: free # Optional: specify your plan (free tier is available)
+    
+    # Build configuration
+    buildCommand: |
+      pip install --upgrade pip
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput --clear
+      # Add any other build steps here if needed (e.g., Tailwind CSS build)
+      
+    # Start command to run your web server
+    startCommand: "gunicorn portfolio_project.wsgi --log-file -"
+    
+    # Environment variables
+    # You can set these directly in the Render dashboard for sensitive values like SECRET_KEY,
+    # or define non-sensitive ones here.
+    # It's best practice to set SECRET_KEY and DEBUG via the Render dashboard.
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.9" # Match your runtime.txt or desired Python version
+      - key: DJANGO_SETTINGS_MODULE 
+        value: "portfolio_project.settings" # Path to your settings file
+      # --- Set these in Render Dashboard Environment Group or directly on the service ---
+      # - key: SECRET_KEY
+      #   generateValue: true # Render can generate a secure secret key for you
+      # - key: DEBUG
+      #   value: "False"
+      # - key: ALLOWED_HOSTS 
+      #   value: ".onrender.com,yourcustomdomain.com" # Replace with your actual domains
+      # - key: DATABASE_URL
+      #   value: "sqlite:///:memory:" # Since it's database-less, or from a managed DB if you add one
+
+    # Health Check (Optional but recommended)
+    # Render uses this to determine if your application has started successfully and is healthy.
+    # Ensure you have a lightweight URL that returns a 200 OK.
+    # The root path '/' is often a good choice for a simple health check.
+    healthCheckPath: /
+    # autoDeploy: true # Optional: enable auto-deploys on push to your connected Git branch (default is true)
+
+# You can also define databases, background workers, cron jobs, etc., in this file.
+# For this database-less app, only the web service is needed.
