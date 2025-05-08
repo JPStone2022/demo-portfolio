@@ -1,0 +1,66 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}All Projects - {{ page_title|default:"My Portfolio" }}{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-6 py-12">
+    <h1 class="text-4xl md:text-5xl font-bold text-center text-gray-800 dark:text-gray-100 mb-12">
+        All My Projects
+    </h1>
+
+    {% if projects %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {% for project in projects %}
+                <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg dark:shadow-blue-900/20 overflow-hidden project-card flex flex-col">
+                    <a href="{% url 'portfolio:project_detail' project_slug_or_id=project.slug|default:project.id %}">
+                        {% if "placehold.co" in project.image_url_template %}
+                            <img src="{{ project.image_url_template }}"
+                                 alt="{{ project.title }} Visual"
+                                 class="w-full h-48 object-cover">
+                        {% else %}
+                            <img src="{% static project.image_url_template %}"
+                                 alt="{{ project.title }} Visual"
+                                 class="w-full h-48 object-cover"
+                                 onerror="this.onerror=null; this.src='https://placehold.co/600x400/E0E0E0/BDBDBD?text=Image+Not+Found&font=inter';">
+                        {% endif %}
+                    </a>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-semibold mb-2">
+                            <a href="{% url 'portfolio:project_detail' project_slug_or_id=project.slug|default:project.id %}" class="text-gray-800 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 transition duration-300">
+                                {{ project.title }}
+                            </a>
+                        </h3>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4 flex-grow">{{ project.description|truncatewords:25 }}</p>
+                        <div class="flex justify-between items-center mb-4">
+                            {% if project.github_url %}
+                                <a href="{{ project.github_url }}" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline font-medium text-sm">View Code</a>
+                            {% else %}<span>&nbsp;</span>{% endif %}
+                            {% if project.demo_url %}
+                                <a href="{{ project.demo_url }}" target="_blank" rel="noopener noreferrer" class="text-green-600 dark:text-green-400 hover:underline font-medium text-sm">Live Demo</a>
+                            {% elif project.paper_url %}
+                                 <a href="{{ project.paper_url }}" target="_blank" rel="noopener noreferrer" class="text-purple-600 dark:text-purple-400 hover:underline font-medium text-sm">Read Paper</a>
+                            {% else %}<span>&nbsp;</span>{% endif %}
+                        </div>
+                        <div class="mt-auto pt-4 border-t border-gray-200 dark:border-gray-600">
+                            <span class="text-sm font-medium text-gray-600 dark:text-gray-400">Skills:</span>
+                            {% for skill_name in project.skills|slice:":3" %} {# Show first 3 skills #}
+                                <span class="ml-1 inline-block bg-gray-200 dark:bg-gray-600 text-gray-800 dark:text-gray-200 text-xs font-semibold mr-1 px-2 py-0.5 rounded">{{ skill_name }}</span>
+                            {% empty %}<span class="ml-2 text-sm text-gray-500 dark:text-gray-400 italic">N/A</span>{% endfor %}
+                            {% if project.skills|length > 3 %}
+                                <span class="ml-1 text-xs text-gray-500 dark:text-gray-400">...</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center text-gray-600 dark:text-gray-400">No projects to display yet. Check back soon!</p>
+    {% endif %}
+
+    <div class="text-center mt-12">
+        <a href="{% url 'portfolio:index' %}" class="text-blue-600 dark:text-blue-400 hover:underline">&larr; Back to Home</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}Colophon - How This Site Was Built - {{ page_title|default:"My Portfolio" }}{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-6 py-12">
+    <div class="max-w-3xl mx-auto bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg dark:shadow-blue-900/20">
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-gray-100 mb-8 text-center">Colophon</h1>
+        
+        <div class="prose prose-indigo dark:prose-invert lg:prose-lg max-w-none text-gray-700 dark:text-gray-300 leading-relaxed">
+            <p>This portfolio website was designed and developed by Julian Stone to showcase projects, skills, and experience. Here's a bit about the technology and tools used in its creation (for this demonstration version):</p>
+
+            <h2 class="!text-2xl">Core Technologies</h2>
+            <ul>
+                <li><strong>Python:</strong> The primary backend programming language.</li>
+                <li><strong>Django:</strong> A high-level Python web framework used for structuring the application, handling requests, and rendering templates. For this Heroku demonstration, it's configured in a "database-less" manner, with content managed via static Python data structures.</li>
+            </ul>
+
+            <h2 class="!text-2xl">Frontend</h2>
+            <ul>
+                <li><strong>HTML5:</strong> For structuring the content.</li>
+                <li><strong>Tailwind CSS:</strong> A utility-first CSS framework used for styling the website and ensuring a responsive design. It allows for rapid UI development directly in the markup.</li>
+                <li><strong>JavaScript:</strong> Used for interactive elements like the dark mode theme toggle.</li>
+                <li><strong>Google Fonts:</strong> The "Inter" font family is used for typography.</li>
+                <li><strong>Heroicons & SVG:</strong> For icons used throughout the site.</li>
+            </ul>
+            
+            <h2 class="!text-2xl">Development & Deployment (for this Demo)</h2>
+            <ul>
+                <li><strong>Visual Studio Code:</strong> Primary code editor.</li>
+                <li><strong>Git & GitHub:</strong> For version control and code hosting.</li>
+                <li><strong>Heroku:</strong> This demonstration version is configured for deployment on Heroku, a cloud platform as a service (PaaS).</li>
+                <li><strong>Gunicorn:</strong> A Python WSGI HTTP server for UNIX, used to serve the Django application on Heroku.</li>
+                <li><strong>WhiteNoise:</strong> For serving static files (CSS, JavaScript, images) efficiently in production with Django.</li>
+            </ul>
+
+            <h2 class="!text-2xl">Design Principles</h2>
+            <ul>
+                <li><strong>Clean and Modern Aesthetic:</strong> Aiming for a professional and visually appealing presentation.</li>
+                <li><strong>Responsive Design:</strong> Ensuring the site looks and works well on all devices (desktops, tablets, and mobile phones).</li>
+                <li><strong>User Experience:</strong> Focused on clear navigation and easy access to information.</li>
+                <li><strong>Accessibility:</strong> Striving to make the website accessible to as many people as possible by following WCAG guidelines where feasible.</li>
+            </ul>
+
+            <p>This site is a continuous work in progress, and I plan to update it with new projects and features over time. The actual live portfolio (if hosted elsewhere like Render) might utilize a full database backend for more dynamic content management.</p>
+        </div>
+    </div>
+    <div class="text-center mt-12">
+        <a href="{% url 'portfolio:index' %}" class="text-blue-600 dark:text-blue-400 hover:underline">&larr; Back to Home</a>
+    </div>
+</div>
+{% endblock %}

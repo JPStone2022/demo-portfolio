@@ -1,0 +1,69 @@
+/* Custom CSS for your portfolio */
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Fade-in animation for main content */
+.fade-in-content {
+    animation: fadeInAnimation ease 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Project card hover effect (if not fully covered by Tailwind) */
+.project-card {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    /* box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); */
+    /* Tailwind's shadow-xl is often good enough: dark:shadow-blue-900/20 */
+}
+
+/* Style for prose content if needed, Tailwind prose plugin is usually good */
+.prose h2 a, .prose h3 a {
+    text-decoration: none;
+    color: inherit;
+}
+/* Ensure links within prose are styled consistently with the site */
+.prose a {
+    color: #2563eb; /* Tailwind's blue-600 */
+    text-decoration: underline;
+}
+.dark .prose a {
+    color: #60a5fa; /* Tailwind's blue-400 */
+}
+
+.prose code::before, .prose code::after {
+    content: ""; /* Remove backticks from inline code if Prism is also styling them */
+}
+
+/* Gradient text helper (applied via class in HTML) */
+.text-gradient-blue-indigo {
+    background-image: linear-gradient(to right, #4F46E5, #3B82F6); /* Example: Indigo to Blue */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+}
+
+/* Navbar adjustments for smaller screens if needed */
+@media (max-width: 640px) { /* sm breakpoint */
+    /* Example: Reduce padding on nav items for very small screens */
+    /* nav .flex.items-center.space-x-4 a {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    } */
+}

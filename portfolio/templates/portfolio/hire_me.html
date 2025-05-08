@@ -1,0 +1,48 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}Hire Me - {{ page_title|default:"My Portfolio" }}{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-6 py-12">
+    <div class="max-w-3xl mx-auto bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg dark:shadow-blue-900/20">
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-gray-100 mb-8 text-center">Let's Build Something Amazing Together</h1>
+        
+        <div class="prose prose-indigo dark:prose-invert lg:prose-lg max-w-none text-gray-700 dark:text-gray-300 leading-relaxed">
+            <p>Thank you for considering me for your project or team. I am passionate about leveraging my skills in Deep Learning, AI, and Software Engineering to create impactful solutions.</p>
+
+            <h2 class="!text-2xl">What I Offer</h2>
+            <ul>
+                <li><strong>Expertise in AI/ML:</strong> Development and deployment of machine learning models, particularly in areas like Computer Vision and Natural Language Processing.</li>
+                <li><strong>Full-Stack Development (Conceptual):</strong> While this demo focuses on a Django frontend, I have experience building full-stack applications. (Tailor this to your actual skills).</li>
+                <li><strong>Problem Solving:</strong> A strong analytical approach to understanding challenges and architecting effective solutions.</li>
+                <li><strong>Collaboration:</strong> I enjoy working in team environments and am committed to clear communication and shared success.</li>
+                <li><strong>Continuous Learning:</strong> Dedicated to staying updated with the latest advancements in AI and software development.</li>
+            </ul>
+
+            <h2 class="!text-2xl">Areas of Interest for Collaboration</h2>
+            <ul>
+                <li>Challenging AI research and development projects.</li>
+                <li>Building intelligent applications that solve real-world problems.</li>
+                <li>Contributing to innovative startups or established tech companies.</li>
+                <li>Freelance/contract opportunities in AI/ML development or data science. (Specify if you're open to this)</li>
+            </ul>
+
+            <h2 class="!text-2xl">How to Proceed</h2>
+            <p>If you have a project in mind, an open position, or just want to explore possibilities, I'd love to hear from you.</p>
+            <p>The best way to reach me is through the <a href="{% url 'portfolio:contact' %}" class="text-blue-600 dark:text-blue-400 hover:underline">Contact Page</a>, where you'll find my email and LinkedIn profile.</p>
+            <p>You can also review my <a href="{% url 'portfolio:cv' %}" class="text-blue-600 dark:text-blue-400 hover:underline">CV/Resume</a> for a more detailed look at my qualifications and experience.</p>
+
+            <div class="mt-8 text-center">
+                 <a href="{% url 'portfolio:contact' %}"
+                   class="inline-block bg-teal-500 hover:bg-teal-600 text-white font-semibold py-3 px-8 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-400 dark:focus:ring-offset-gray-800 transition duration-300">
+                    Contact Me
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="text-center mt-12">
+        <a href="{% url 'portfolio:index' %}" class="text-blue-600 dark:text-blue-400 hover:underline">&larr; Back to Home</a>
+    </div>
+</div>
+{% endblock %}

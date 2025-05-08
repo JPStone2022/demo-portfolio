@@ -1,0 +1,52 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}Interactive Demos - {{ page_title|default:"My Portfolio" }}{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-6 py-12">
+    <h1 class="text-4xl md:text-5xl font-bold text-center text-gray-800 dark:text-gray-100 mb-12">
+        Interactive Demos
+    </h1>
+
+    {% if demos %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {% for demo_item in demos %}
+                <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg dark:shadow-purple-900/20 overflow-hidden project-card flex flex-col">
+                    <a href="{% if demo_item.demo_live_url != '#' %}{{ demo_item.demo_live_url }}{% else %}{% url 'portfolio:demo_detail' demo_slug_or_id=demo_item.slug|default:demo_item.id %}{% endif %}" class="block hover:opacity-90" {% if demo_item.demo_live_url != '#' %}target="_blank" rel="noopener noreferrer"{% endif %}>
+                        {% if "placehold.co" in demo_item.image_url_template %}
+                            <img src="{{ demo_item.image_url_template }}"
+                                 alt="{{ demo_item.title }} Preview"
+                                 class="w-full h-48 object-cover">
+                        {% else %}
+                            <img src="{% static demo_item.image_url_template %}"
+                                 alt="{{ demo_item.title }} Preview"
+                                 class="w-full h-48 object-cover"
+                                 onerror="this.onerror=null; this.src='https://placehold.co/600x400/E0E0E0/BDBDBD?text=Image+Not+Found&font=inter';">
+                        {% endif %}
+                    </a>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-semibold mb-2">
+                            <a href="{% if demo_item.demo_live_url != '#' %}{{ demo_item.demo_live_url }}{% else %}{% url 'portfolio:demo_detail' demo_slug_or_id=demo_item.slug|default:demo_item.id %}{% endif %}" class="text-gray-800 dark:text-gray-100 hover:text-purple-600 dark:hover:text-purple-400 transition duration-300" {% if demo_item.demo_live_url != '#' %}target="_blank" rel="noopener noreferrer"{% endif %}>
+                                {{ demo_item.title }}
+                            </a>
+                        </h3>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4 flex-grow">{{ demo_item.description|truncatewords:30 }}</p>
+                        <div class="mt-auto pt-4 border-t border-gray-200 dark:border-gray-600 text-right">
+                            <a href="{% if demo_item.demo_live_url != '#' %}{{ demo_item.demo_live_url }}{% else %}{% url 'portfolio:demo_detail' demo_slug_or_id=demo_item.slug|default:demo_item.id %}{% endif %}" class="text-sm text-purple-600 dark:text-purple-400 hover:underline font-medium" {% if demo_item.demo_live_url != '#' %}target="_blank" rel="noopener noreferrer"{% endif %}>
+                                {% if demo_item.demo_live_url != '#' %}Try Demo{% else %}View Details{% endif %} &rarr;
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center text-gray-600 dark:text-gray-400">No demos to display yet.</p>
+    {% endif %}
+
+    <div class="text-center mt-12">
+        <a href="{% url 'portfolio:index' %}" class="text-blue-600 dark:text-blue-400 hover:underline">&larr; Back to Home</a>
+    </div>
+</div>
+{% endblock %}

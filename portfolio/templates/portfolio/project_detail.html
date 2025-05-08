@@ -1,0 +1,84 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}{{ project.title }} - {{ page_title|default:"Project Details" }}{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-6 py-12">
+    <article class="max-w-4xl mx-auto bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-lg shadow-lg dark:shadow-blue-900/20">
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-gray-100 mb-6">{{ project.title }}</h1>
+
+        {# Corrected 'contains' syntax #}
+        {% if "placehold.co" in project.image_url_template %}
+            <img src="{{ project.image_url_template }}"
+                 alt="{{ project.title }} Visual"
+                 class="w-full h-auto max-h-96 object-contain rounded-md mb-6">
+        {% else %}
+            <img src="{% static project.image_url_template %}"
+                 alt="{{ project.title }} Visual"
+                 class="w-full h-auto max-h-96 object-contain rounded-md mb-6"
+                 onerror="this.onerror=null; this.src='https://placehold.co/800x400/E0E0E0/BDBDBD?text=Image+Not+Found&font=inter';">
+        {% endif %}
+
+
+        <div class="prose prose-indigo dark:prose-invert lg:prose-lg max-w-none text-gray-700 dark:text-gray-300 leading-relaxed space-y-4 mb-8">
+            {# Use safe filter if your long_description contains HTML, otherwise linebreaksbr #}
+            {{ project.long_description|linebreaksbr|default:project.description|linebreaksbr }}
+        </div>
+
+        <div class="mb-8 space-y-3">
+            {% if project.github_url %}
+            <p>
+                <strong class="text-gray-700 dark:text-gray-300">GitHub Repository:</strong>
+                <a href="{{ project.github_url }}" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline ml-2">{{ project.github_url }}</a>
+            </p>
+            {% endif %}
+            {% if project.demo_url %}
+            <p>
+                <strong class="text-gray-700 dark:text-gray-300">Live Demo:</strong>
+                <a href="{{ project.demo_url }}" target="_blank" rel="noopener noreferrer" class="text-green-600 dark:text-green-400 hover:underline ml-2">{{ project.demo_url }}</a>
+            </p>
+            {% endif %}
+            {% if project.paper_url %}
+            <p>
+                <strong class="text-gray-700 dark:text-gray-300">Related Paper:</strong>
+                <a href="{{ project.paper_url }}" target="_blank" rel="noopener noreferrer" class="text-purple-600 dark:text-purple-400 hover:underline ml-2">{{ project.paper_url }}</a>
+            </p>
+            {% endif %}
+             <p>
+                <strong class="text-gray-700 dark:text-gray-300">Date Created:</strong>
+                {# Use the date_created_obj from view if available for better formatting #}
+                <span class="text-gray-600 dark:text-gray-400 ml-2">{{ project.date_created_obj|date:"F j, Y"|default:project.date_created }}</span>
+            </p>
+        </div>
+
+
+        {% if project.skills %}
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-3">Skills Used:</h3>
+                <div class="flex flex-wrap gap-2">
+                    {% for skill_name in project.skills %}
+                        <span class="inline-block bg-gray-200 dark:bg-gray-600 text-gray-800 dark:text-gray-200 text-sm font-semibold px-3 py-1 rounded-full">{{ skill_name }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+
+        {% if project.topics %}
+            <div>
+                <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-3">Related Topics:</h3>
+                <div class="flex flex-wrap gap-2">
+                    {% for topic_name in project.topics %}
+                        <span class="inline-block bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 text-sm font-semibold px-3 py-1 rounded-full">{{ topic_name }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </article>
+
+    <div class="text-center mt-12">
+        <a href="{% url 'portfolio:all_projects' %}" class="text-blue-600 dark:text-blue-400 hover:underline mr-4">&larr; Back to All Projects</a>
+        <a href="{% url 'portfolio:index' %}" class="text-blue-600 dark:text-blue-400 hover:underline">&larr; Back to Home</a>
+    </div>
+</div>
+{% endblock %}

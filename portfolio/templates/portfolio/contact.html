@@ -1,0 +1,55 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}Contact Me - {{ page_title|default:"My Portfolio" }}{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-6 py-12">
+    <h1 class="text-4xl md:text-5xl font-bold text-center text-gray-800 dark:text-gray-100 mb-12">
+        Get In Touch
+    </h1>
+    <div class="max-w-2xl mx-auto bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg dark:shadow-blue-900/20">
+        <p class="text-gray-700 dark:text-gray-300 mb-6 text-lg leading-relaxed">
+            I'm always excited to discuss new projects, collaborations, or opportunities.
+            While this demo version doesn't have a functional backend for the form, you can typically reach me through the following channels:
+        </p>
+        
+        <div class="space-y-4 mb-8">
+            <p class="text-gray-700 dark:text-gray-300">
+                <strong>Email:</strong> <a href="mailto:your.email@example.com" class="text-blue-600 dark:text-blue-400 hover:underline">your.email@example.com</a> (Replace with your actual email)
+            </p>
+            <p class="text-gray-700 dark:text-gray-300">
+                <strong>LinkedIn:</strong> <a href="https://linkedin.com/in/julianpstone" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">linkedin.com/in/julianpstone</a>
+            </p>
+             <p class="text-gray-700 dark:text-gray-300">
+                <strong>GitHub:</strong> <a href="https://github.com/JPStone2022" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">github.com/JPStone2022</a>
+            </p>
+        </div>
+
+        <p class="text-gray-600 dark:text-gray-400 text-sm">
+            (The form below is a non-functional placeholder for this Heroku deployment demonstration.)
+        </p>
+        <form action="#" method="POST" class="mt-4 opacity-50 pointer-events-none"> {% csrf_token %} <div class="mb-4">
+                <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Full Name</label>
+                <input type="text" name="name" id="name" autocomplete="name" class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm dark:bg-gray-700 dark:text-gray-100" placeholder="Your Name" disabled>
+            </div>
+            <div class="mb-4">
+                <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email Address</label>
+                <input type="email" name="email" id="email" autocomplete="email" class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm dark:bg-gray-700 dark:text-gray-100" placeholder="you@example.com" disabled>
+            </div>
+            <div class="mb-6">
+                <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Message</label>
+                <textarea id="message" name="message" rows="4" class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm dark:bg-gray-700 dark:text-gray-100" placeholder="Your message..." disabled></textarea>
+            </div>
+            <div>
+                <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-gray-800" disabled>
+                    Send Message (Disabled)
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="text-center mt-12">
+        <a href="{% url 'portfolio:index' %}" class="text-blue-600 dark:text-blue-400 hover:underline">&larr; Back to Home</a>
+    </div>
+</div>
+{% endblock %}

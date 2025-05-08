@@ -1,0 +1,92 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}Search Results for "{{ query }}" - {{ page_title|default:"My Portfolio" }}{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-6 py-12">
+    <h1 class="text-3xl md:text-4xl font-bold text-center text-gray-800 dark:text-gray-100 mb-6">
+        Search Results
+    </h1>
+    {% if query %}
+        <p class="text-center text-lg text-gray-600 dark:text-gray-400 mb-10">
+            Showing results for: <strong class="text-gray-800 dark:text-gray-200">"{{ query }}"</strong>
+        </p>
+    {% else %}
+        <p class="text-center text-lg text-gray-600 dark:text-gray-400 mb-10">
+            Please enter a search term in the navigation bar.
+        </p>
+    {% endif %}
+
+    {% if project_results or skill_results or topic_results %}
+        {% if project_results %}
+            <section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-6">Projects Found ({{ project_results|length }})</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {% for project in project_results %}
+                        <div class="bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden project-card flex flex-col">
+                            <a href="{% url 'portfolio:project_detail' project_slug_or_id=project.slug|default:project.id %}">
+                                {% if "placehold.co" in project.image_url_template %}
+                                    <img src="{{ project.image_url_template }}" alt="{{ project.title }} Visual" class="w-full h-40 object-cover">
+                                {% else %}
+                                    <img src="{% static project.image_url_template %}" alt="{{ project.title }} Visual" class="w-full h-40 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x300/E0E0E0/BDBDBD?text=Image&font=inter';">
+                                {% endif %}
+                            </a>
+                            <div class="p-4 flex flex-col flex-grow">
+                                <h3 class="text-lg font-semibold mb-1">
+                                    <a href="{% url 'portfolio:project_detail' project_slug_or_id=project.slug|default:project.id %}" class="text-gray-800 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400">
+                                        {{ project.title }}
+                                    </a>
+                                </h3>
+                                <p class="text-sm text-gray-600 dark:text-gray-300 mb-3 flex-grow">{{ project.description|truncatewords:20 }}</p>
+                                <div class="mt-auto text-xs">
+                                    <span class="font-medium text-gray-500 dark:text-gray-400">Skills:</span>
+                                    {% for skill_name in project.skills|slice:":2" %}
+                                        <span class="ml-1 bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-200 px-1.5 py-0.5 rounded text-xs">{{ skill_name }}</span>
+                                    {% endfor %}
+                                    {% if project.skills|length > 2 %}...{% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+        {% endif %}
+
+        {% if skill_results %}
+            <section class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-6">Skills Found ({{ skill_results|length }})</h2>
+                <div class="flex flex-wrap gap-3">
+                    {% for skill in skill_results %}
+                        <a href="{% url 'portfolio:skill_list' %}#skill-{{ skill.id }}" class="inline-block bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 text-gray-800 dark:text-gray-200 font-medium px-3 py-1.5 rounded-full shadow-sm text-sm">
+                            {{ skill.name }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </section>
+        {% endif %}
+
+        {% if topic_results %}
+            <section>
+                <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-6">Topics Found ({{ topic_results|length }})</h2>
+                <div class="flex flex-wrap gap-3">
+                    {% for topic in topic_results %}
+                         <a href="{% url 'portfolio:topic_list' %}#topic-{{ topic.slug }}" class="inline-block bg-indigo-100 dark:bg-indigo-900 hover:bg-indigo-200 dark:hover:bg-indigo-800 text-indigo-800 dark:text-indigo-200 font-medium px-3 py-1.5 rounded-full shadow-sm text-sm">
+                            {{ topic.name }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </section>
+        {% endif %}
+
+    {% elif query %}
+        <p class="text-center text-xl text-gray-700 dark:text-gray-300">
+            No results found for <strong class="text-gray-800 dark:text-gray-200">"{{ query }}"</strong>. Try a different search term.
+        </p>
+    {% endif %}
+
+    <div class="text-center mt-16">
+        <a href="{% url 'portfolio:index' %}" class="text-blue-600 dark:text-blue-400 hover:underline">&larr; Back to Home</a>
+    </div>
+</div>
+{% endblock %}

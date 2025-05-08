@@ -1,0 +1,36 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}Privacy Policy - {{ page_title|default:"My Portfolio" }}{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-6 py-12">
+    <div class="max-w-3xl mx-auto bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg dark:shadow-blue-900/20">
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-gray-100 mb-8 text-center">Privacy Policy</h1>
+        
+        <div class="prose prose-indigo dark:prose-invert lg:prose-lg max-w-none text-gray-700 dark:text-gray-300 leading-relaxed">
+            <p><strong>Last Updated: {% now "F j, Y" %}</strong></p>
+
+            <p>This is a demonstration portfolio website. For the purpose of this demo, this website does not collect any personal data from its visitors.</p>
+            
+            <h2 class="!text-2xl">Information Collection and Use</h2>
+            <p>No cookies are used for tracking, and no personal information is actively collected or stored through this website. If you contact Julian Stone directly via email or other external links provided, your communication will be handled outside of this website's scope.</p>
+
+            <h2 class="!text-2xl">Third-Party Services</h2>
+            <p>This website may use third-party services for hosting (e.g., Heroku) or content delivery (e.g., CDNs for Tailwind CSS, fonts). These services may have their own privacy policies. This site itself does not share any user data with them as none is collected.</p>
+            
+            <h2 class="!text-2xl">Data Security</h2>
+            <p>As no personal data is collected by this website, there are no specific data security measures related to user data implemented on this site itself. Standard web security practices are followed for the site's operation.</p>
+
+            <h2 class="!text-2xl">Changes to This Privacy Policy</h2>
+            <p>This Privacy Policy may be updated from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes.</p>
+
+            <h2 class="!text-2xl">Contact Us</h2>
+            <p>If you have any questions about this Privacy Policy, please contact me via the methods listed on the <a href="{% url 'portfolio:contact' %}" class="text-blue-600 dark:text-blue-400 hover:underline">Contact page</a>.</p>
+        </div>
+    </div>
+    <div class="text-center mt-12">
+        <a href="{% url 'portfolio:index' %}" class="text-blue-600 dark:text-blue-400 hover:underline">&larr; Back to Home</a>
+    </div>
+</div>
+{% endblock %}

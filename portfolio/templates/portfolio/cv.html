@@ -1,0 +1,89 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}CV / Resume - {{ page_title|default:"My Portfolio" }}{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-6 py-12">
+    <div class="max-w-3xl mx-auto bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg dark:shadow-blue-900/20">
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-gray-100 mb-8 text-center">Curriculum Vitae / Resume</h1>
+        
+        <div class="prose prose-indigo dark:prose-invert lg:prose-lg max-w-none text-gray-700 dark:text-gray-300 leading-relaxed">
+            <p class="text-center mb-6">
+                This page is a placeholder for an online CV or a link to a downloadable PDF version.
+                For a real portfolio, you would embed your CV details here or provide a prominent download link.
+            </p>
+
+            <div class="text-center mb-8">
+                <a href="{% static 'portfolio/documents/Julian_Stone_CV_Placeholder.pdf' %}" 
+                   target="_blank" 
+                   class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-gray-800">
+                    Download CV (PDF Placeholder)
+                </a>
+                <p class="text-xs mt-2 text-gray-500 dark:text-gray-400">(Ensure you have a PDF at 'portfolio/static/portfolio/documents/your_cv_name.pdf')</p>
+            </div>
+
+            <h2 class="!text-2xl">Julian Stone</h2>
+            <p class="lead">Deep Learning Engineer & AI Researcher</p>
+            <p>
+                [Your Contact Email] | [Your Phone Number (Optional)] | [Link to LinkedIn Profile] | [Link to GitHub Profile]
+            </p>
+
+            <hr class="my-6 border-gray-300 dark:border-gray-600">
+
+            <h3 class="!text-xl font-semibold">Summary</h3>
+            <p>
+                Highly motivated and results-oriented Deep Learning Engineer with X years of experience in developing and implementing machine learning models, particularly in computer vision and NLP. Proficient in Python, TensorFlow, PyTorch, and cloud platforms. Passionate about solving complex problems and driving innovation through AI.
+                (Replace this with your actual summary.)
+            </p>
+
+            <h3 class="!text-xl font-semibold">Experience</h3>
+            <p>
+                <strong>[Your Most Recent Role Title]</strong> | [Company Name] | [Dates of Employment]<br>
+                -   [Responsibility or Achievement 1]<br>
+                -   [Responsibility or Achievement 2]<br>
+                -   [Responsibility or Achievement 3]
+            </p>
+            <p>
+                <strong>[Previous Role Title]</strong> | [Company Name] | [Dates of Employment]<br>
+                -   [Responsibility or Achievement 1]<br>
+                -   [Responsibility or Achievement 2]
+            </p>
+
+            <h3 class="!text-xl font-semibold">Education</h3>
+            <p>
+                <strong>[Your Degree Title, e.g., M.S. in Computer Science]</strong> | [University Name] | [Graduation Date]<br>
+                <em>Specialization/Thesis (if applicable): [Details]</em>
+            </p>
+            <p>
+                <strong>[Your Other Degree Title, e.g., B.S. in Software Engineering]</strong> | [University Name] | [Graduation Date]
+            </p>
+
+            <h3 class="!text-xl font-semibold">Skills</h3>
+            <p>
+                <strong>Programming Languages:</strong> Python (Expert), JavaScript, SQL, C++, Java (List your proficiency) <br>
+                <strong>Frameworks & Libraries:</strong> TensorFlow, PyTorch, Keras, Scikit-learn, Pandas, NumPy, Hugging Face Transformers, Django, Flask <br>
+                <strong>Tools & Platforms:</strong> Git, Docker, AWS, GCP, Linux, Jupyter Notebooks <br>
+                <strong>Domains:</strong> Computer Vision, NLP, Deep Learning, Machine Learning, Data Analysis, MLOps
+            </p>
+
+            <h3 class="!text-xl font-semibold">Projects</h3>
+            <p>
+                (Briefly mention 2-3 key projects here, similar to your portfolio, or refer to the projects section of the website.)<br>
+                -   <a href="{% url 'portfolio:all_projects' %}" class="text-blue-600 dark:text-blue-400 hover:underline">View detailed projects on this website.</a>
+            </p>
+
+            <h3 class="!text-xl font-semibold">Certifications (Optional)</h3>
+            <p>
+                -   [Certificate Name] - [Issuing Organization] ([Year])<br>
+                -   [Certificate Name] - [Issuing Organization] ([Year])
+            </p>
+            
+            <p class="mt-6 text-sm text-gray-600 dark:text-gray-400"><em>References available upon request.</em></p>
+        </div>
+    </div>
+    <div class="text-center mt-12">
+        <a href="{% url 'portfolio:index' %}" class="text-blue-600 dark:text-blue-400 hover:underline">&larr; Back to Home</a>
+    </div>
+</div>
+{% endblock %}

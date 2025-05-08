@@ -1,0 +1,50 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}Accessibility Statement - {{ page_title|default:"My Portfolio" }}{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-6 py-12">
+    <div class="max-w-3xl mx-auto bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg dark:shadow-blue-900/20">
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-gray-100 mb-8 text-center">Accessibility Statement</h1>
+
+        <div class="prose prose-indigo dark:prose-invert lg:prose-lg max-w-none text-gray-700 dark:text-gray-300 leading-relaxed">
+            <p>Julian Stone is committed to ensuring digital accessibility for people with disabilities. We are continually improving the user experience for everyone and applying the relevant accessibility standards.</p>
+
+            <h2 class="!text-2xl">Measures to Support Accessibility</h2>
+            <p>This portfolio website takes the following measures to ensure accessibility:</p>
+            <ul>
+                <li>Include accessibility as part of our design and development practices.</li>
+                <li>Use semantic HTML for clear structure and meaning.</li>
+                <li>Provide alternative text for images where appropriate.</li>
+                <li>Ensure sufficient color contrast for text elements.</li>
+                <li>Strive for keyboard navigability.</li>
+                <li>Employ responsive design for usability across various devices.</li>
+            </ul>
+
+            <h2 class="!text-2xl">Conformance Status</h2>
+            <p>The <a href="https://www.w3.org/TR/WCAG/" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">Web Content Accessibility Guidelines (WCAG)</a> defines requirements for designers and developers to improve accessibility for people with disabilities. This site aims to adhere to WCAG 2.1 Level AA standards where possible.</p>
+            <p>While we strive to adhere to the accepted guidelines and standards for accessibility, it is not always possible to do so in all areas of the website, particularly with dynamically loaded content or third-party integrations.</p>
+
+            <h2 class="!text-2xl">Feedback</h2>
+            <p>We welcome your feedback on the accessibility of this portfolio. Please let us know if you encounter accessibility barriers:</p>
+            <ul>
+                <li>Via the <a href="{% url 'portfolio:contact' %}" class="text-blue-600 dark:text-blue-400 hover:underline">Contact page</a>.</li>
+            </ul>
+            <p>We try to respond to feedback within a reasonable timeframe.</p>
+
+            <h2 class="!text-2xl">Technical Specifications</h2>
+            <p>Accessibility of this portfolio relies on the following technologies to work with the particular combination of web browser and any assistive technologies or plugins installed on your computer:</p>
+            <ul>
+                <li>HTML</li>
+                <li>CSS (Tailwind CSS)</li>
+                <li>JavaScript</li>
+            </ul>
+            <p>These technologies are relied upon for conformance with the accessibility standards used.</p>
+        </div>
+    </div>
+    <div class="text-center mt-12">
+        <a href="{% url 'portfolio:index' %}" class="text-blue-600 dark:text-blue-400 hover:underline">&larr; Back to Home</a>
+    </div>
+</div>
+{% endblock %}

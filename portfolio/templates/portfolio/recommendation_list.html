@@ -1,0 +1,41 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}Recommendations - {{ page_title|default:"My Portfolio" }}{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-6 py-12">
+    <h1 class="text-4xl md:text-5xl font-bold text-center text-gray-800 dark:text-gray-100 mb-12">
+        Recommendations
+    </h1>
+    <p class="text-center text-lg text-gray-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto">
+        Here are some books, courses, tools, and resources that I've found valuable in my journey as a developer and AI enthusiast.
+    </p>
+
+    {% if recommendations %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {% for item in recommendations %}
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md dark:shadow-blue-900/20 flex flex-col items-center text-center transition duration-300 hover:shadow-lg transform hover:scale-[1.03]">
+                    {% if "placehold.co" in item.image_url_template %}
+                        <img src="{{ item.image_url_template }}" alt="{{ item.name }} Image" class="h-32 w-auto object-contain mb-4 rounded">
+                    {% else %}
+                         <img src="{% static item.image_url_template %}" alt="{{ item.name }} Image" class="h-32 w-auto object-contain mb-4 rounded" onerror="this.onerror=null; this.src='https://placehold.co/200x128/E0E0E0/BDBDBD?text=Image&font=inter';">
+                    {% endif %}
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-1">{{ item.name }}</h3>
+                    {% if item.category %}<p class="text-sm text-blue-600 dark:text-blue-400 font-medium mb-2">{{ item.category }}</p>{% endif %}
+                    <p class="text-gray-700 dark:text-gray-300 mb-4 flex-grow text-sm">{{ item.description }}</p>
+                    <a href="{{ item.product_url }}" target="_blank" rel="noopener nofollow" class="mt-auto inline-block bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 text-gray-800 dark:text-gray-200 font-medium px-4 py-2 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-gray-800">
+                        View Product &rarr;
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center text-gray-600 dark:text-gray-400">No recommendations to display yet.</p>
+    {% endif %}
+
+    <div class="text-center mt-12">
+        <a href="{% url 'portfolio:index' %}" class="text-blue-600 dark:text-blue-400 hover:underline">&larr; Back to Home</a>
+    </div>
+</div>
+{% endblock %}

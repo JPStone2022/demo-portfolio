@@ -1,0 +1,48 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}Terms and Conditions - {{ page_title|default:"My Portfolio" }}{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-6 py-12">
+    <div class="max-w-3xl mx-auto bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg dark:shadow-blue-900/20">
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-gray-100 mb-8 text-center">Terms and Conditions</h1>
+        
+        <div class="prose prose-indigo dark:prose-invert lg:prose-lg max-w-none text-gray-700 dark:text-gray-300 leading-relaxed">
+            <p><strong>Last Updated: {% now "F j, Y" %}</strong></p>
+
+            <p>Welcome to Julian Stone's portfolio website. These terms and conditions outline the rules and regulations for the use of this website.</p>
+            <p>By accessing this website, we assume you accept these terms and conditions. Do not continue to use this website if you do not agree to all of the terms and conditions stated on this page.</p>
+
+            <h2 class="!text-2xl">Intellectual Property Rights</h2>
+            <p>Unless otherwise stated, Julian Stone and/or its licensors own the intellectual property rights for all material on this website. All intellectual property rights are reserved. You may access this from the website for your own personal use subjected to restrictions set in these terms and conditions.</p>
+            <p>You must not:</p>
+            <ul>
+                <li>Republish material from this website without proper attribution.</li>
+                <li>Sell, rent, or sub-license material from this website.</li>
+                <li>Reproduce, duplicate or copy material from this website for commercial purposes without explicit permission.</li>
+                <li>Redistribute content from this website (unless content is specifically made for redistribution).</li>
+            </ul>
+
+            <h2 class="!text-2xl">Use of Website</h2>
+            <p>You agree to use this website only for lawful purposes and in a way that does not infringe the rights of, restrict, or inhibit anyone else's use and enjoyment of the website. Prohibited behavior includes harassing or causing distress or inconvenience to any other user, transmitting obscene or offensive content, or disrupting the normal flow of dialogue within this website.</p>
+
+            <h2 class="!text-2xl">Disclaimer</h2>
+            <p>The information on this website is provided "as is" with no warranties, express or implied. While we strive to keep the information up to date and correct, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability with respect to the website or the information, products, services, or related graphics contained on the website for any purpose.</p>
+            <p>This website is a demonstration portfolio. The content, including project descriptions and skill listings, is for informational and illustrative purposes only.</p>
+
+            <h2 class="!text-2xl">Limitation of Liability</h2>
+            <p>In no event will Julian Stone be liable for any loss or damage including without limitation, indirect or consequential loss or damage, or any loss or damage whatsoever arising from loss of data or profits arising out of, or in connection with, the use of this website.</p>
+
+            <h2 class="!text-2xl">Governing Law</h2>
+            <p>These terms and conditions are governed by and construed in accordance with the laws of the United Kingdom, and you irrevocably submit to the exclusive jurisdiction of the courts in that State or location.</p>
+
+            <h2 class="!text-2xl">Changes to These Terms</h2>
+            <p>We reserve the right to revise these terms and conditions at any time. By using this website, you are expected to review these terms on a regular basis to ensure you understand all terms and conditions governing use of this website.</p>
+        </div>
+    </div>
+    <div class="text-center mt-12">
+        <a href="{% url 'portfolio:index' %}" class="text-blue-600 dark:text-blue-400 hover:underline">&larr; Back to Home</a>
+    </div>
+</div>
+{% endblock %}
