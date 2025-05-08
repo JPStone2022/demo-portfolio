@@ -3,7 +3,7 @@
 
 services:
   - type: web # Specifies a web service
-    name: django-portfolio # Name of your service on Render
+    name: demo-portfolio # Name of your service on Render
     env: python # Environment (Python, Node, etc.)
     region: oregon # Optional: choose a region closer to you/your users (e.g., frankfurt, singapore)
     plan: free # Optional: specify your plan (free tier is available)
