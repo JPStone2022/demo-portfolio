@@ -1,0 +1,6 @@
+Django>=4.2,<5.0 # Or your preferred Django version
+gunicorn
+whitenoise
+python-dotenv # If you use a .env file locally
+django-environ # For managing settings via environment variables
+dj-database-url # To handle DATABASE_URL from Heroku, even if it's just a dummy one
